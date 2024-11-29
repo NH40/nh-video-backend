@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '4200:4200'
+    depends_on:
+      - postgres
+    environment:
+      - NODE_ENV=development
+      - PORT=4200
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/nh_video?schema=public
+      - JWT_SECRET=your_jwt_secret
+    volumes:
+      - ./uploads:/app/uploads
+      - ./emails:/app/emails
+    networks:
+      - nh-network
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=nh_video
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - nh-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  nh-network:
+    driver: bridge
