@@ -1,0 +1,32 @@
+- Установить pg admin (postgresql на пк)
+- Создать БД через pg admin и запомнить ее название
+- Получать username, password postgresql
+- Обновить данные в env
+DATABASE_URL=postgresql://postgres:123456@localhost:5432/red-video?schema=public
+
+postgres - твой юзернейм postgresql
+123456 - твой пароль postgresql
+localhost - не меняется
+5432 - дефолтный порт, иногда может меняться
+auth-mk - название твое базы
+
+- Получить google recaptcha v2
+	Перейти на сайт https://www.google.com/recaptcha/admin/create
+	Зарегистрировать сайт
+	Получить ключи
+	Вставить их в env RECATCHA_SITE_KEY на фронте, RECAPTCHA_SECRET_KEY на бэке
+
+- Получить SMTP ключи
+	Перейти на сайт https://mailgun.com/ или любой другой сервис
+	Зарегистрироваться
+	Получить ключи
+	Вставить их в env SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
+
+Не забыть сделать
+	Если bun не установлен
+		curl -fsSL https://bun.sh/install | bash
+	bun install
+	bun prisma db push
+
+Наполнить бд
+	bun seed:run
