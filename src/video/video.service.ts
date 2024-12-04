@@ -295,23 +295,23 @@ export class VideoService {
 			take: limit
 		})
 
-		console.log(
-			(
-				await this.prisma.video.findMany({
-					where: {
-						isPublic: true,
-						id: { notIn: excludeIds }
-					},
-					include: {
-						channel: { include: { user: true } },
-						tags: true
-					},
-					orderBy: { createdAt: 'desc' },
-					skip,
-					take: limit
-				})
-			).length
-		)
+		// console.log(
+		// 	(
+		// 		await this.prisma.video.findMany({
+		// 			where: {
+		// 				isPublic: true,
+		// 				id: { notIn: excludeIds }
+		// 			},
+		// 			include: {
+		// 				channel: { include: { user: true } },
+		// 				tags: true
+		// 			},
+		// 			orderBy: { createdAt: 'desc' },
+		// 			skip,
+		// 			take: limit
+		// 		})
+		// 	).length
+		// )
 
 		return {
 			videos,
